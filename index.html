@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syed Muhammad Kashan Ali - Game Developer</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- GAMING THEME VARIABLES --- */
+        :root {
+            --bg-color: #090a0f;      /* Deep dark background */
+            --surface-color: #151823; /* Slightly lighter for cards */
+            --accent-color: #00f2fe;  /* Neon Cyan */
+            --accent-glow: 0 0 15px rgba(0, 242, 254, 0.6);
+            --text-main: #ffffff;
+            --text-muted: #a0aec0;
+            --border-color: #2d3748;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 242, 254, 0.05), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(138, 43, 226, 0.05), transparent 25%);
+        }
+
+        /* CUSTOM GAMING SCROLLBAR */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: #1a202c; border-radius: 5px; border: 1px solid var(--accent-color); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: #fff;
+            text-shadow: var(--accent-glow);
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 50px;
+            text-align: center;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-main);
+        }
+
+        h2 span {
+            color: var(--accent-color);
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(9, 10, 15, 0.85);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(0, 242, 254, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: var(--text-main);
+            text-shadow: var(--accent-glow);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- HERO SECTION --- */
+        #home {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(0, 242, 254, 0.1) 0%, var(--bg-color) 70%);
+        }
+
+        .hero-content {
+            width: 100%;
+        }
+
+        /* Animated Gradient Text */
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #00f2fe, #4facfe, #00f2fe);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientText 3s linear infinite;
+        }
+
+        @keyframes gradientText {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        /* Glowing Button */
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            border-radius: 5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.2) inset, 0 0 10px rgba(0, 242, 254, 0.2);
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.8), 0 0 40px rgba(0, 242, 254, 0.4);
+            transform: translateY(-3px);
+        }
+
+        /* --- SCROLL ANIMATION CLASSES (Reveal) --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- ABOUT & EXPERIENCE --- */
+        #about p {
+            font-size: 1.1rem;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 20px auto;
+            color: var(--text-muted);
+        }
+
+        .experience-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .exp-item {
+            background: var(--surface-color);
+            padding: 25px 30px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .exp-item:hover {
+            transform: translateX(10px);
+            box-shadow: -5px 10px 20px rgba(0, 242, 254, 0.1);
+        }
+
+        .exp-item h3 {
+            color: var(--text-main);
+            margin-bottom: 5px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .exp-item h3 i { color: var(--accent-color); }
+
+        .exp-item .company {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-left: 32px; 
+        }
+
+        /* --- PROJECTS SECTION --- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .project-card {
+            background-color: var(--surface-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 30px rgba(0, 242, 254, 0.2);
+        }
+
+        .project-media {
+            width: 100%;
+            height: 200px;
+            background-color: #000;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Overlay blur effect for gamer vibe */
+        .project-media::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, transparent 50%, var(--surface-color) 100%);
+            pointer-events: none;
+        }
+
+        .project-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease; 
+        }
+
+        .project-card:hover .project-media img {
+            transform: scale(1.1) rotate(2deg); 
+        }
+
+        .project-info {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .project-info p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 25px;
+        }
+
+        .tag {
+            background: rgba(0, 242, 254, 0.1);
+            color: var(--accent-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border: 1px solid rgba(0, 242, 254, 0.3);
+        }
+
+        /* Smaller Button for Cards */
+        .btn-small {
+            padding: 8px 15px;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        /* --- SKILLS & FOOTER --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-category {
+            background-color: var(--surface-color);
+            padding: 35px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-category:hover {
+            border-color: var(--accent-color);
+            box-shadow: inset 0 0 20px rgba(0, 242, 254, 0.05);
+        }
+
+        .skill-category h3 { margin-bottom: 25px; color: var(--text-main); text-align: center; }
+        .skill-category h3 i { color: var(--accent-color); margin-right: 10px; }
+        .skill-category ul { list-style: none; color: var(--text-muted); padding-left: 20px;}
+        .skill-category li { margin-bottom: 12px; display: flex; align-items: center; gap: 12px; font-weight: 600;}
+        .skill-category li i { color: var(--accent-color); width: 20px; text-align: center; font-size: 1.2rem;}
+
+        footer {
+            background-color: #06070b;
+            padding: 60px 0 30px 0;
+            text-align: center;
+            border-top: 1px solid rgba(0, 242, 254, 0.2);
+            margin-top: 50px;
+        }
+
+        .contact-info { margin: 30px 0; color: var(--text-muted); }
+        .contact-info p { margin: 15px 0; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.1rem;}
+        .contact-info i { color: var(--accent-color); font-size: 1.3rem;}
+        
+        .social-links { margin: 30px 0; }
+        .social-links a { 
+            margin: 0 10px; 
+            font-size: 1.1rem; 
+            font-weight: 600; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 8px;
+            padding: 12px 25px;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+        .social-links a:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.2);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-content h1 { font-size: 2.8rem; }
+            .hero-content p { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="container">
+            <div class="logo">Kashan<span>Ali</span></div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Games</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home">
+        <div class="container hero-content reveal active">
+            <h1>Syed M. Kashan Ali</h1>
+            <p>Sr. Unity Developer <i class="fa-brands fa-unity" style="color: var(--accent-color);"></i> | Gameplay | Optimization</p>
+            <a href="#projects" class="btn"><i class="fa-solid fa-gamepad"></i> Explore My Games</a>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="reveal">
+        <div class="container">
+            <h2><span>About</span> Me</h2>
+            <p>I am a dedicated game developer with four years of hands-on experience in the gaming industry. My passion for creating immersive and engaging experiences drives me to excel in gameplay programming, game design, and optimization.</p>
+            <p>With strong technical skills in C++, Unity, and Unreal Engine, I specialize in implementing innovative mechanics and delivering top-notch mobile experiences. I thrive in dynamic environments and enjoy collaborating with multidisciplinary teams to bring high-quality games to life.</p>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE SECTION -->
+    <section id="experience" class="reveal">
+        <div class="container">
+            <h2><span>Career</span> Path</h2>
+            <div class="experience-list">
+                <div class="exp-item reveal">
+                    <h3><i class="fa-solid fa-briefcase"></i> Sr. Unity Developer</h3>
+                    <p class="company">Zekab Games | Feb 2023 - Present</p>
+                </div>
+                <div class="exp-item reveal">
+                    <h3><i class="fa-solid fa-briefcase"></i> Sr. Unity Developer</h3>
+                    <p class="company">Alam Digital | Oct 2022 - Jan 2023</p>
+                </div>
+                <div class="exp-item reveal">
+                    <h3><i class="fa-solid fa-laptop-code"></i> Unity Developer</h3>
+                    <p class="company">Grape Games | Mar 2022 - Oct 2022</p>
+                </div>
+                <div class="exp-item reveal">
+                    <h3><i class="fa-solid fa-chalkboard-user"></i> Game Development Instructor</h3>
+                    <p class="company">Hazza Institute of Technology | Mar 2022 - Oct 2022</p>
+                </div>
+                <div class="exp-item reveal">
+                    <h3><i class="fa-solid fa-laptop-code"></i> Unity Developer</h3>
+                    <p class="company">Skippy Apps | Jun 2021 - Mar 2022</p>
+                </div>
+                <div class="exp-item reveal" style="border-left-color: #8a2be2;">
+                    <h3 style="color: #8a2be2;"><i class="fa-solid fa-graduation-cap" style="color: #8a2be2;"></i> Bachelors in Computer Science</h3>
+                    <p class="company">PMAS Arid Agricultural University Rawalpindi | Graduated 2021</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="reveal">
+        <div class="container">
+            <h2><span>Featured</span> Games</h2>
+            <div class="project-grid">
+
+                <!-- 1 -->
+                <div class="project-card reveal">
+                    <div class="project-media">
+                        <img src="https://play-lh.googleusercontent.com/4ewLINrfckOo4xP_sqKYWXaH7yOhOFJ5we2x73pYqNRp6PbiSAjx6HoQOYkvNoObRqAGFuqMfO_TYB9QMZHGIQ=w480-h960-rw" alt="Open World Adventure">
+                    </div>
+                    <div class="project-info">
+                        <h3>Ultimate Open World</h3>
+                        <p>An immersive simulation and adventure game featuring an expansive open world environment.</p>
+                        <div class="tags"><span class="tag">Unity</span><span class="tag">Android</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.ultimate.openworld.adventure.simulation.freegame" target="_blank" class="btn btn-small"><i class="fa-brands fa-google-play"></i> Play Store</a>
+                    </div>
+                </div>
+
+                <!-- 2 -->
+                <div class="project-card reveal">
+                    <div class="project-media">
+                        <img src="https://play-lh.googleusercontent.com/SGW_gJvCKeaPoXeq1zsO8QtohzaR2I7b2ovqebw9Jc-McsNem1Vh2cP2n3VrFwMOmzY=w480-h960-rw" alt="Wedding Dressup">
+                    </div>
+                    <div class="project-info">
+                        <h3>Wedding Dress Up</h3>
+                        <p>A mobile styling and dress-up game focused on bridal fashion and makeup mechanics.</p>
+                        <div class="tags"><span class="tag">Unity</span><span class="tag">Android</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.sg.wedding.dressup.makeup.games" target="_blank" class="btn btn-small"><i class="fa-brands fa-google-play"></i> Play Store</a>
+                    </div>
+                </div>
+
+                <!-- 3 -->
+                <div class="project-card reveal">
+                    <div class="project-media">
+                        <img src="https://play-lh.googleusercontent.com/a1jVzRcYHIFamsc9NKVyazkGdKN7aaKYzbIto9m7W_XPinlMLv0g4jdSGRBVyC5o-vcnqf9klmnZuqDOwDBx=w480-h960-rw" alt="GT Bike Car Racing">
+                    </div>
+                    <div class="project-info">
+                        <h3>GT Bike & Car Racing</h3>
+                        <p>High-speed racing experience combining both GT bikes and cars in a single game environment.</p>
+                        <div class="tags"><span class="tag">Unity</span><span class="tag">Android</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.gt.bike.car.racing.game.free" target="_blank" class="btn btn-small"><i class="fa-brands fa-google-play"></i> Play Store</a>
+                    </div>
+                </div>
+
+                <!-- 4 -->
+                <div class="project-card reveal">
+                    <div class="project-media">
+                        <img src="https://play-lh.googleusercontent.com/MThsthiQsN4xDuKTRGhioxVFT_Hsp35Pv0IeQaN05zXCmo-PoKfjiDPIDP_BPmArJdY=w480-h960-rw" alt="Modern Car Parking">
+                    </div>
+                    <div class="project-info">
+                        <h3>Modern Car Simulator</h3>
+                        <p>Precision driving simulator focusing on complex vehicle parking mechanics and controls.</p>
+                        <div class="tags"><span class="tag">Unity</span><span class="tag">Android</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.kn.moderncar.simulator.parking.games" target="_blank" class="btn btn-small"><i class="fa-brands fa-google-play"></i> Play Store</a>
+                    </div>
+                </div>
+
+                <!-- 5 -->
+                <div class="project-card reveal">
+                    <div class="project-media">
+                        <img src="https://play-lh.googleusercontent.com/CnL2AakWxg82Am4aKel_bitxhdNcqriAUQatmgss2dz9zfuZ6Zm9OIFkC8Kiqbr7bpw=w480-h960-rw" alt="Commando Adventure">
+                    </div>
+                    <div class="project-info">
+                        <h3>Commando Adventure</h3>
+                        <p>Action-packed mobile shooting game with commando-style missions and adventure combat.</p>
+                        <div class="tags"><span class="tag">Unity</span><span class="tag">Android</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.babloo.commando.adventure.shooting" target="_blank" class="btn btn-small"><i class="fa-brands fa-google-play"></i> Play Store</a>
+                    </div>
+                </div>
+
+                <!-- 6 -->
+                <div class="project-card reveal">
+                    <div class="project-media">
+                        <img src="https://play-lh.googleusercontent.com/s8ExCH4ibsz6trjAVWijDtxGVK3s6sdjIe5F2V_5H0gRHJvN0EIuNtokOU8qRHcqbcZQNVfAGy77iYN1qrTqdA=w480-h960-rw" alt="Prado Car Parking">
+                    </div>
+                    <div class="project-info">
+                        <h3>Free Prado Parking</h3>
+                        <p>Challenging mobile vehicle parking simulation featuring Prado SUV mechanics.</p>
+                        <div class="tags"><span class="tag">Unity</span><span class="tag">Android</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.sg.free.prado.car.parking.games" target="_blank" class="btn btn-small"><i class="fa-brands fa-google-play"></i> Play Store</a>
+                    </div>
+                </div>
+
+                <!-- 7 -->
+                <div class="project-card reveal">
+                    <div class="project-media">
+                        <img src="https://play-lh.googleusercontent.com/D6bJFUzu7f1gLigFm4b-3p365_X_33kahUQJo78gmnv7LCiqcUtRYO8GmXawj8R-0MVZnsEsmh_F8YblzQlWI6c=w480-h960-rw" alt="Endless Mini Racing">
+                    </div>
+                    <div class="project-info">
+                        <h3>Endless Mini Racing</h3>
+                        <p>Casual endless runner style racing game optimized for quick mobile gameplay sessions.</p>
+                        <div class="tags"><span class="tag">Unity</span><span class="tag">Android</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.endless.car.racing.mini.game.free" target="_blank" class="btn btn-small"><i class="fa-brands fa-google-play"></i> Play Store</a>
+                    </div>
+                </div>
+
+                <!-- 8 -->
+                <div class="project-card reveal">
+                    <div class="project-media">
+                        <img src="https://play-lh.googleusercontent.com/iQX5dAm8AGiUhQoGJTUEa07dkWI_77qZvrtlWJN3SNdNv5wRLANe-jHyGdFcfkmxmdY=w480-h960-rw" alt="Bike Race Free">
+                    </div>
+                    <div class="project-info">
+                        <h3>Bike Race Free</h3>
+                        <p>Exciting mobile bike racing experience featuring various tracks and high-speed mechanics.</p>
+                        <div class="tags"><span class="tag">Unity</span><span class="tag">Android</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.kn.bike.race.free.games" target="_blank" class="btn btn-small"><i class="fa-brands fa-google-play"></i> Play Store</a>
+                    </div>
+                </div>
+
+                <!-- 9 -->
+                <div class="project-card reveal">
+                    <div class="project-media">
+                        <img src="https://play-lh.googleusercontent.com/r1UKHuj59QtdrwYaqBhUV1VprJKFUYI7b0ojaYfM4yozeFLB40SS4q9Xe4f_-WqOOiw=w480-h960-rw" alt="Chef Cooking City">
+                    </div>
+                    <div class="project-info">
+                        <h3>Chef Cooking City</h3>
+                        <p>A fast-paced time-management cooking game where players serve dishes in a crazy culinary city.</p>
+                        <div class="tags"><span class="tag">Unity</span><span class="tag">Simulation</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.twizar.chef.cooking.city.mad.crazy.game&hl=en" target="_blank" class="btn btn-small"><i class="fa-brands fa-google-play"></i> Play Store</a>
+                    </div>
+                </div>
+
+                <!-- 10 -->
+                <div class="project-card reveal">
+                    <div class="project-media">
+                        <img src="https://play-lh.googleusercontent.com/8cQm8seQ5iJmZWKZF-XjiMbJ0jlT4t4dZQCwASo7jLPJF_ih964hXdWOVqwOV32Uk1th=w480-h960-rw" alt="Knights Shadow Fight">
+                    </div>
+                    <div class="project-info">
+                        <h3>Knights Shadow Fight</h3>
+                        <p>Action combat war game focused on medieval knight combat and shadow fight mechanics.</p>
+                        <div class="tags"><span class="tag">Unity</span><span class="tag">Android</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.knights.shadowfightbattle.war" target="_blank" class="btn btn-small"><i class="fa-brands fa-google-play"></i> Play Store</a>
+                    </div>
+                </div>
+
+                <!-- 11 -->
+                <div class="project-card reveal">
+                    <div class="project-media">
+                        <img src="https://play-lh.googleusercontent.com/o4xJYxNznqjA34BMJtP1LWG8dfyZa_5DubRqDZrrNOUIRs9kVOGBzM72A-mEM361Qg=w480-h960-rw" alt="High Speed Racing">
+                    </div>
+                    <div class="project-info">
+                        <h3>High Speed Real Racing</h3>
+                        <p>Fast-paced car racing game designed to push mobile graphic performance and speed thrills.</p>
+                        <div class="tags"><span class="tag">Unity</span><span class="tag">Android</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.fungames.high.speed.real.car.racing" target="_blank" class="btn btn-small"><i class="fa-brands fa-google-play"></i> Play Store</a>
+                    </div>
+                </div>
+
+                <!-- 12 -->
+                <div class="project-card reveal">
+                    <div class="project-media">
+                        <img src="https://play-lh.googleusercontent.com/lWHSVPsLSVLza4Jx8w9KBK7Jlzy3hrIEzfSP2GYvGyWG1MRiLNG6485aRVpAw_x1w17CcNFAzCHWEmwMGCO6nQ=w480-h960-rw" alt="Motobike Traffic Rider">
+                    </div>
+                    <div class="project-info">
+                        <h3>Motobike Traffic Rider</h3>
+                        <p>Endless highway motorcycle game featuring heavy traffic dodging and high-score chasing.</p>
+                        <div class="tags"><span class="tag">Unity</span><span class="tag">Android</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.and.endless.motobike.traffic.rider" target="_blank" class="btn btn-small"><i class="fa-brands fa-google-play"></i> Play Store</a>
+                    </div>
+                </div>
+
+                <!-- 13 -->
+                <div class="project-card reveal">
+                    <div class="project-media">
+                        <img src="https://play-lh.googleusercontent.com/1AMFNtC-75EB5Aob-aFDfcISKp522cUJHE1PRymBdNt14Onph-j5sHHFB-Gzyp9xgg=w1052-h592-rw" alt="Car Stunt Master">
+                    </div>
+                    <div class="project-info">
+                        <h3>Car Stunt Master GT</h3>
+                        <p>Extreme mobile stunt driving game allowing players to perform impossible GT car jumps.</p>
+                        <div class="tags"><span class="tag">Unity</span><span class="tag">Android</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.kn.car.stunt.master.gtcar.games" target="_blank" class="btn btn-small"><i class="fa-brands fa-google-play"></i> Play Store</a>
+                    </div>
+                </div>
+
+                <!-- 14 -->
+                <div class="project-card reveal">
+                    <div class="project-media">
+                        <img src="https://play-lh.googleusercontent.com/UuW8Oin4TS-ud6nMbwcUqTjxjSyAxYQpmpY1VxF74B84dOoh4ASC_NFkrNxQk1q07Kc=w480-h960-rw" alt="Thief Runner Puzzle Escape">
+                    </div>
+                    <div class="project-info">
+                        <h3>Thief Runner Escape</h3>
+                        <p>A hyper-casual puzzle escape game featuring stealth mechanics, running, and puzzle-solving.</p>
+                        <div class="tags"><span class="tag">Unity</span><span class="tag">Puzzle</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.funbashtechnologies.thief.runner.puzzle.escape.game" target="_blank" class="btn btn-small"><i class="fa-brands fa-google-play"></i> Play Store</a>
+                    </div>
+                </div>
+
+                <!-- 15 -->
+                <div class="project-card reveal">
+                    <div class="project-media">
+                        <img src="https://play-lh.googleusercontent.com/stGWZfHGXunef_IYjvxq9v_zmJycezUJEE3eCu46mkrjgGevGg6j2tMMjnAafaWo3fSrWmXaUevVY3eolQAUi2w=w480-h960-rw" alt="Highway Car Racing">
+                    </div>
+                    <div class="project-info">
+                        <h3>Highway Racing Sim</h3>
+                        <p>High-speed highway simulator blending fast driving elements with dynamic traffic systems.</p>
+                        <div class="tags"><span class="tag">Unity</span><span class="tag">Android</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.pw.highway.car.racing.simulator" target="_blank" class="btn btn-small"><i class="fa-brands fa-google-play"></i> Play Store</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="reveal">
+        <div class="container">
+            <h2><span>Tech</span> Stack</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3><i class="fa-solid fa-code"></i> Programming</h3>
+                    <ul>
+                        <li><i class="fa-solid fa-file-code"></i> C++</li>
+                        <li><i class="fa-solid fa-hashtag"></i> C#</li>
+                        <li><i class="fa-solid fa-c"></i> C</li>
+                        <li><i class="fa-brands fa-java"></i> Java</li>
+                        <li><i class="fa-brands fa-python"></i> Python</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fa-solid fa-microchip"></i> Game Engines</h3>
+                    <ul>
+                        <li><i class="fa-brands fa-unity"></i> Unity 3D / 2D</li>
+                        <li><i class="fa-solid fa-gamepad"></i> Unreal Engine</li>
+                        <li><i class="fa-solid fa-gears"></i> Gameplay Mechanics</li>
+                        <li><i class="fa-solid fa-mobile-screen-button"></i> Mobile Optimization</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fa-solid fa-toolbox"></i> Core Skills</h3>
+                    <ul>
+                        <li><i class="fa-solid fa-pen-ruler"></i> Game Design</li>
+                        <li><i class="fa-solid fa-lightbulb"></i> Problem-Solving</li>
+                        <li><i class="fa-brands fa-wordpress"></i> WordPress</li>
+                        <li><i class="fa-solid fa-users"></i> Team Collaboration</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER / CONTACT -->
+    <footer id="contact">
+        <div class="container reveal">
+            <h2>Let's <span>Connect</span></h2>
+            <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Ready to build the next big hit? I am eager to contribute my expertise to the continued growth and success of future gaming projects.</p>
+            
+            <div class="contact-info">
+                <p><i class="fa-solid fa-envelope"></i> <strong>Email:</strong> syedmuhammadkashanali@gmail.com</p>
+                <p><i class="fa-solid fa-phone"></i> <strong>Phone:</strong> (+92) 304 0512820</p>
+                <p><i class="fa-solid fa-location-dot"></i> <strong>Location:</strong> Islamabad / Rawalpindi, Pakistan</p>
+            </div>
+
+            <a href="mailto:syedmuhammadkashanali@gmail.com" class="btn" style="margin-bottom: 30px;"><i class="fa-solid fa-paper-plane"></i> Send an Email</a>
+
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/syed-muhammad-kashan-ali-7761b921a" target="_blank"><i class="fa-brands fa-linkedin" style="color: #0077b5;"></i> LinkedIn</a>
+                <a href="#" target="_blank"><i class="fa-brands fa-github" style="color: #fff;"></i> GitHub</a>
+            </div>
+            
+            <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 50px;">&copy; 2026 Syed Muhammad Kashan Ali. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- --- SCROLL ANIMATION SCRIPT --- -->
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100; // Trigger point
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        
+        window.addEventListener("scroll", reveal);
+        // Trigger once on load
+        reveal();
+    </script>
+</body>
+</html>
