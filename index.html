@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Syed Muhammad Kashan Ali — Senior Unity Game Developer specializing in gameplay programming, mobile optimization, and published Android games." />
+  <meta name="author" content="Syed Muhammad Kashan Ali" />
+  <meta property="og:title" content="Kashan Ali · Sr. Unity Developer" />
+  <meta property="og:description" content="4+ years shipping mobile games. 15+ titles on Google Play." />
+  <title>Kashan Ali · Sr. Unity Developer</title>
+
+  <!-- Google Fonts: Syne (display) + DM Sans (body) + DM Mono (accents) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════ -->
+  <header role="banner">
+    <nav id="navbar" aria-label="Primary navigation">
+      <div class="container nav__inner">
+        <a href="#home" class="nav__logo" aria-label="Kashan Ali – back to top">
+          Kashan<span>.</span>
+        </a>
+        <ul class="nav__links" id="navLinks" role="list">
+          <li><a href="#home"       class="nav__link">Home</a></li>
+          <li><a href="#about"      class="nav__link">About</a></li>
+          <li><a href="#experience" class="nav__link">Experience</a></li>
+          <li><a href="#projects"   class="nav__link">Games</a></li>
+          <li><a href="#skills"     class="nav__link">Skills</a></li>
+          <li><a href="#contact"    class="nav__link">Contact</a></li>
+        </ul>
+        <button class="nav__hamburger" id="hamburger"
+                aria-label="Toggle navigation menu"
+                aria-expanded="false"
+                aria-controls="navLinks">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ═══════════════════════════════════════
+         HERO
+    ═══════════════════════════════════════ -->
+    <section id="home" aria-label="Introduction">
+      <!-- Ambient particle canvas — purely decorative -->
+      <canvas id="particleCanvas" aria-hidden="true"></canvas>
+
+      <div class="hero__content">
+        <div class="hero__badge reveal-up">
+          <span class="badge__dot" aria-hidden="true"></span>
+          Available for Hire
+        </div>
+
+        <h1 class="hero__name reveal-up">
+          Syed&nbsp;M.<br />Kashan&nbsp;Ali
+        </h1>
+
+        <p class="hero__role reveal-up">
+          Sr. Unity Developer &nbsp;·&nbsp;
+          <span class="typewriter" id="typewriter" aria-live="polite"></span>
+        </p>
+
+        <!-- Animated stat counters -->
+        <div class="hero__stats reveal-up" aria-label="Career highlights">
+          <div class="stat">
+            <div class="stat__value">
+              <span class="stat__num" data-target="4">0</span><span class="stat__plus">+</span>
+            </div>
+            <span class="stat__label">Years Exp.</span>
+          </div>
+          <div class="stat__rule" aria-hidden="true"></div>
+          <div class="stat">
+            <div class="stat__value">
+              <span class="stat__num" data-target="15">0</span><span class="stat__plus">+</span>
+            </div>
+            <span class="stat__label">Games Shipped</span>
+          </div>
+          <div class="stat__rule" aria-hidden="true"></div>
+          <div class="stat">
+            <div class="stat__value">
+              <span class="stat__num" data-target="5">0</span>
+            </div>
+            <span class="stat__label">Studios</span>
+          </div>
+        </div>
+
+        <div class="hero__cta reveal-up">
+          <a href="#projects" class="btn btn--primary">
+            <i class="fa-solid fa-gamepad" aria-hidden="true"></i> View My Games
+          </a>
+          <a href="#contact" class="btn btn--ghost">
+            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Hire Me
+          </a>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="scroll-hint" aria-hidden="true">
+        <span class="scroll-hint__line"></span>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+         ABOUT
+    ═══════════════════════════════════════ -->
+    <section id="about" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <span class="section-eyebrow">Who I Am</span>
+          <h2 id="about-heading">About <span>Me</span></h2>
+        </div>
+
+        <div class="about__grid reveal-up">
+          <div class="about__text">
+            <p>I am a dedicated game developer with <strong>four years of hands-on experience</strong> in the gaming industry. My passion for creating immersive and engaging experiences drives me to excel in gameplay programming, game design, and platform optimization.</p>
+            <p>With strong technical skills in <strong>C++, Unity, and Unreal Engine</strong>, I specialize in implementing innovative mechanics and delivering top-notch mobile experiences. I thrive in dynamic environments and enjoy collaborating with multidisciplinary teams to bring high-quality games to life.</p>
+          </div>
+
+          <div class="about__highlights">
+            <div class="highlight-card">
+              <span class="highlight-card__icon" aria-hidden="true">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+              </span>
+              <div>
+                <strong>Mobile-First</strong>
+                <p>Optimizing for Android performance &amp; battery efficiency</p>
+              </div>
+            </div>
+            <div class="highlight-card">
+              <span class="highlight-card__icon" aria-hidden="true">
+                <i class="fa-brands fa-unity"></i>
+              </span>
+              <div>
+                <strong>Unity Expert</strong>
+                <p>3D / 2D games, physics, shaders &amp; optimization</p>
+              </div>
+            </div>
+            <div class="highlight-card">
+              <span class="highlight-card__icon" aria-hidden="true">
+                <i class="fa-solid fa-gears"></i>
+              </span>
+              <div>
+                <strong>Gameplay Systems</strong>
+                <p>Mechanics design, AI scripting &amp; procedural generation</p>
+              </div>
+            </div>
+            <div class="highlight-card">
+              <span class="highlight-card__icon" aria-hidden="true">
+                <i class="fa-solid fa-users"></i>
+              </span>
+              <div>
+                <strong>Team Player</strong>
+                <p>Agile workflows &amp; cross-functional collaboration</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+         EXPERIENCE — Timeline
+    ═══════════════════════════════════════ -->
+    <section id="experience" aria-labelledby="exp-heading">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <span class="section-eyebrow">Work History</span>
+          <h2 id="exp-heading">Career <span>Path</span></h2>
+        </div>
+
+        <ol class="timeline" role="list">
+
+          <li class="timeline__item reveal-up">
+            <div class="timeline__dot" aria-hidden="true"></div>
+            <div class="timeline__card">
+              <time class="timeline__period" datetime="2023-02">Feb 2023 – Present</time>
+              <h3><i class="fa-solid fa-briefcase" aria-hidden="true"></i> Sr. Unity Developer</h3>
+              <p class="timeline__company">Zekab Games</p>
+            </div>
+          </li>
+
+          <li class="timeline__item reveal-up">
+            <div class="timeline__dot" aria-hidden="true"></div>
+            <div class="timeline__card">
+              <time class="timeline__period" datetime="2022-10">Oct 2022 – Jan 2023</time>
+              <h3><i class="fa-solid fa-briefcase" aria-hidden="true"></i> Sr. Unity Developer</h3>
+              <p class="timeline__company">Alam Digital</p>
+            </div>
+          </li>
+
+          <li class="timeline__item reveal-up">
+            <div class="timeline__dot" aria-hidden="true"></div>
+            <div class="timeline__card">
+              <time class="timeline__period" datetime="2022-03">Mar 2022 – Oct 2022</time>
+              <h3><i class="fa-solid fa-laptop-code" aria-hidden="true"></i> Unity Developer</h3>
+              <p class="timeline__company">Grape Games</p>
+            </div>
+          </li>
+
+          <li class="timeline__item reveal-up">
+            <div class="timeline__dot" aria-hidden="true"></div>
+            <div class="timeline__card">
+              <time class="timeline__period" datetime="2022-03">Mar 2022 – Oct 2022</time>
+              <h3><i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i> Game Development Instructor</h3>
+              <p class="timeline__company">Hazza Institute of Technology</p>
+            </div>
+          </li>
+
+          <li class="timeline__item reveal-up">
+            <div class="timeline__dot" aria-hidden="true"></div>
+            <div class="timeline__card">
+              <time class="timeline__period" datetime="2021-06">Jun 2021 – Mar 2022</time>
+              <h3><i class="fa-solid fa-laptop-code" aria-hidden="true"></i> Unity Developer</h3>
+              <p class="timeline__company">Skippy Apps</p>
+            </div>
+          </li>
+
+          <li class="timeline__item reveal-up">
+            <div class="timeline__dot timeline__dot--edu" aria-hidden="true"></div>
+            <div class="timeline__card timeline__card--edu">
+              <time class="timeline__period timeline__period--edu" datetime="2021">Graduated 2021</time>
+              <h3><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> BSc. Computer Science</h3>
+              <p class="timeline__company">PMAS Arid Agricultural University, Rawalpindi</p>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+         PROJECTS — Filterable Grid
+    ═══════════════════════════════════════ -->
+    <section id="projects" aria-labelledby="projects-heading">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <span class="section-eyebrow">Published Work</span>
+          <h2 id="projects-heading">Featured <span>Games</span></h2>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="filter-bar reveal-up" role="tablist" aria-label="Filter games by genre">
+          <button class="filter-btn is-active" data-filter="all"        role="tab" aria-selected="true">All</button>
+          <button class="filter-btn"           data-filter="racing"     role="tab" aria-selected="false">Racing</button>
+          <button class="filter-btn"           data-filter="action"     role="tab" aria-selected="false">Action</button>
+          <button class="filter-btn"           data-filter="simulation" role="tab" aria-selected="false">Simulation</button>
+          <button class="filter-btn"           data-filter="casual"     role="tab" aria-selected="false">Casual</button>
+          <button class="filter-btn"           data-filter="puzzle"     role="tab" aria-selected="false">Puzzle</button>
+        </div>
+
+        <div class="project-grid" id="projectGrid" role="list">
+
+          <!-- 01 -->
+          <article class="project-card reveal-up" data-category="simulation" role="listitem">
+            <div class="project-card__image">
+              <img src="https://play-lh.googleusercontent.com/4ewLINrfckOo4xP_sqKYWXaH7yOhOFJ5we2x73pYqNRp6PbiSAjx6HoQOYkvNoObRqAGFuqMfO_TYB9QMZHGIQ=w480-h960-rw"
+                   alt="Ultimate Open World Adventure — Google Play screenshot" loading="lazy" />
+            </div>
+            <div class="project-card__body">
+              <div class="project-card__tags">
+                <span class="tag">Unity</span><span class="tag">Android</span>
+                <span class="tag tag--genre">Simulation</span>
+              </div>
+              <h3>Ultimate Open World</h3>
+              <p>An immersive simulation and adventure game featuring an expansive open world environment.</p>
+              <a href="https://play.google.com/store/apps/details?id=com.ultimate.openworld.adventure.simulation.freegame"
+                 target="_blank" rel="noopener noreferrer" class="btn btn--card">
+                <i class="fa-brands fa-google-play" aria-hidden="true"></i> Play Store
+              </a>
+            </div>
+          </article>
+
+          <!-- 02 -->
+          <article class="project-card reveal-up" data-category="casual" role="listitem">
+            <div class="project-card__image">
+              <img src="https://play-lh.googleusercontent.com/SGW_gJvCKeaPoXeq1zsO8QtohzaR2I7b2ovqebw9Jc-McsNem1Vh2cP2n3VrFwMOmzY=w480-h960-rw"
+                   alt="Wedding Dress Up — Google Play screenshot" loading="lazy" />
+            </div>
+            <div class="project-card__body">
+              <div class="project-card__tags">
+                <span class="tag">Unity</span><span class="tag">Android</span>
+                <span class="tag tag--genre">Casual</span>
+              </div>
+              <h3>Wedding Dress Up</h3>
+              <p>A mobile styling and dress-up game focused on bridal fashion and makeup mechanics.</p>
+              <a href="https://play.google.com/store/apps/details?id=com.sg.wedding.dressup.makeup.games"
+                 target="_blank" rel="noopener noreferrer" class="btn btn--card">
+                <i class="fa-brands fa-google-play" aria-hidden="true"></i> Play Store
+              </a>
+            </div>
+          </article>
+
+          <!-- 03 -->
+          <article class="project-card reveal-up" data-category="racing" role="listitem">
+            <div class="project-card__image">
+              <img src="https://play-lh.googleusercontent.com/a1jVzRcYHIFamsc9NKVyazkGdKN7aaKYzbIto9m7W_XPinlMLv0g4jdSGRBVyC5o-vcnqf9klmnZuqDOwDBx=w480-h960-rw"
+                   alt="GT Bike Car Racing — Google Play screenshot" loading="lazy" />
+            </div>
+            <div class="project-card__body">
+              <div class="project-card__tags">
+                <span class="tag">Unity</span><span class="tag">Android</span>
+                <span class="tag tag--genre">Racing</span>
+              </div>
+              <h3>GT Bike &amp; Car Racing</h3>
+              <p>High-speed racing experience combining both GT bikes and cars in a single game environment.</p>
+              <a href="https://play.google.com/store/apps/details?id=com.gt.bike.car.racing.game.free"
+                 target="_blank" rel="noopener noreferrer" class="btn btn--card">
+                <i class="fa-brands fa-google-play" aria-hidden="true"></i> Play Store
+              </a>
+            </div>
+          </article>
+
+          <!-- 04 -->
+          <article class="project-card reveal-up" data-category="simulation" role="listitem">
+            <div class="project-card__image">
+              <img src="https://play-lh.googleusercontent.com/MThsthiQsN4xDuKTRGhioxVFT_Hsp35Pv0IeQaN05zXCmo-PoKfjiDPIDP_BPmArJdY=w480-h960-rw"
+                   alt="Modern Car Simulator — Google Play screenshot" loading="lazy" />
+            </div>
+            <div class="project-card__body">
+              <div class="project-card__tags">
+                <span class="tag">Unity</span><span class="tag">Android</span>
+                <span class="tag tag--genre">Simulation</span>
+              </div>
+              <h3>Modern Car Simulator</h3>
+              <p>Precision driving simulator focusing on complex vehicle parking mechanics and controls.</p>
+              <a href="https://play.google.com/store/apps/details?id=com.kn.moderncar.simulator.parking.games"
+                 target="_blank" rel="noopener noreferrer" class="btn btn--card">
+                <i class="fa-brands fa-google-play" aria-hidden="true"></i> Play Store
+              </a>
+            </div>
+          </article>
+
+          <!-- 05 -->
+          <article class="project-card reveal-up" data-category="action" role="listitem">
+            <div class="project-card__image">
+              <img src="https://play-lh.googleusercontent.com/CnL2AakWxg82Am4aKel_bitxhdNcqriAUQatmgss2dz9zfuZ6Zm9OIFkC8Kiqbr7bpw=w480-h960-rw"
+                   alt="Commando Adventure — Google Play screenshot" loading="lazy" />
+            </div>
+            <div class="project-card__body">
+              <div class="project-card__tags">
+                <span class="tag">Unity</span><span class="tag">Android</span>
+                <span class="tag tag--genre">Action</span>
+              </div>
+              <h3>Commando Adventure</h3>
+              <p>Action-packed mobile shooting game with commando-style missions and adventure combat.</p>
+              <a href="https://play.google.com/store/apps/details?id=com.babloo.commando.adventure.shooting"
+                 target="_blank" rel="noopener noreferrer" class="btn btn--card">
+                <i class="fa-brands fa-google-play" aria-hidden="true"></i> Play Store
+              </a>
+            </div>
+          </article>
+
+          <!-- 06 -->
+          <article class="project-card reveal-up" data-category="simulation" role="listitem">
+            <div class="project-card__image">
+              <img src="https://play-lh.googleusercontent.com/s8ExCH4ibsz6trjAVWijDtxGVK3s6sdjIe5F2V_5H0gRHJvN0EIuNtokOU8qRHcqbcZQNVfAGy77iYN1qrTqdA=w480-h960-rw"
+                   alt="Free Prado Parking — Google Play screenshot" loading="lazy" />
+            </div>
+            <div class="project-card__body">
+              <div class="project-card__tags">
+                <span class="tag">Unity</span><span class="tag">Android</span>
+                <span class="tag tag--genre">Simulation</span>
+              </div>
+              <h3>Free Prado Parking</h3>
+              <p>Challenging mobile vehicle parking simulation featuring Prado SUV mechanics.</p>
+              <a href="https://play.google.com/store/apps/details?id=com.sg.free.prado.car.parking.games"
+                 target="_blank" rel="noopener noreferrer" class="btn btn--card">
+                <i class="fa-brands fa-google-play" aria-hidden="true"></i> Play Store
+              </a>
+            </div>
+          </article>
+
+          <!-- 07 -->
+          <article class="project-card reveal-up" data-category="racing casual" role="listitem">
+            <div class="project-card__image">
+              <img src="https://play-lh.googleusercontent.com/D6bJFUzu7f1gLigFm4b-3p365_X_33kahUQJo78gmnv7LCiqcUtRYO8GmXawj8R-0MVZnsEsmh_F8YblzQlWI6c=w480-h960-rw"
+                   alt="Endless Mini Racing — Google Play screenshot" loading="lazy" />
+            </div>
+            <div class="project-card__body">
+              <div class="project-card__tags">
+                <span class="tag">Unity</span><span class="tag">Android</span>
+                <span class="tag tag--genre">Racing</span>
+              </div>
+              <h3>Endless Mini Racing</h3>
+              <p>Casual endless runner-style racing game optimized for quick mobile gameplay sessions.</p>
+              <a href="https://play.google.com/store/apps/details?id=com.endless.car.racing.mini.game.free"
+                 target="_blank" rel="noopener noreferrer" class="btn btn--card">
+                <i class="fa-brands fa-google-play" aria-hidden="true"></i> Play Store
+              </a>
+            </div>
+          </article>
+
+          <!-- 08 -->
+          <article class="project-card reveal-up" data-category="racing" role="listitem">
+            <div class="project-card__image">
+              <img src="https://play-lh.googleusercontent.com/iQX5dAm8AGiUhQoGJTUEa07dkWI_77qZvrtlWJN3SNdNv5wRLANe-jHyGdFcfkmxmdY=w480-h960-rw"
+                   alt="Bike Race Free — Google Play screenshot" loading="lazy" />
+            </div>
+            <div class="project-card__body">
+              <div class="project-card__tags">
+                <span class="tag">Unity</span><span class="tag">Android</span>
+                <span class="tag tag--genre">Racing</span>
+              </div>
+              <h3>Bike Race Free</h3>
+              <p>Exciting mobile bike racing experience featuring various tracks and high-speed mechanics.</p>
+              <a href="https://play.google.com/store/apps/details?id=com.kn.bike.race.free.games"
+                 target="_blank" rel="noopener noreferrer" class="btn btn--card">
+                <i class="fa-brands fa-google-play" aria-hidden="true"></i> Play Store
+              </a>
+            </div>
+          </article>
+
+          <!-- 09 -->
+          <article class="project-card reveal-up" data-category="casual simulation" role="listitem">
+            <div class="project-card__image">
+              <img src="https://play-lh.googleusercontent.com/r1UKHuj59QtdrwYaqBhUV1VprJKFUYI7b0ojaYfM4yozeFLB40SS4q9Xe4f_-WqOOiw=w480-h960-rw"
+                   alt="Chef Cooking City — Google Play screenshot" loading="lazy" />
+            </div>
+            <div class="project-card__body">
+              <div class="project-card__tags">
+                <span class="tag">Unity</span><span class="tag">Android</span>
+                <span class="tag tag--genre">Casual</span>
+              </div>
+              <h3>Chef Cooking City</h3>
+              <p>A fast-paced time-management cooking game where players serve dishes in a crazy culinary city.</p>
+              <a href="https://play.google.com/store/apps/details?id=com.twizar.chef.cooking.city.mad.crazy.game"
+                 target="_blank" rel="noopener noreferrer" class="btn btn--card">
+                <i class="fa-brands fa-google-play" aria-hidden="true"></i> Play Store
+              </a>
+            </div>
+          </article>
+
+          <!-- 10 -->
+          <article class="project-card reveal-up" data-category="action" role="listitem">
+            <div class="project-card__image">
+              <img src="https://play-lh.googleusercontent.com/8cQm8seQ5iJmZWKZF-XjiMbJ0jlT4t4dZQCwASo7jLPJF_ih964hXdWOVqwOV32Uk1th=w480-h960-rw"
+                   alt="Knights Shadow Fight — Google Play screenshot" loading="lazy" />
+            </div>
+            <div class="project-card__body">
+              <div class="project-card__tags">
+                <span class="tag">Unity</span><span class="tag">Android</span>
+                <span class="tag tag--genre">Action</span>
+              </div>
+              <h3>Knights Shadow Fight</h3>
+              <p>Action combat war game focused on medieval knight combat and shadow fight mechanics.</p>
+              <a href="https://play.google.com/store/apps/details?id=com.knights.shadowfightbattle.war"
+                 target="_blank" rel="noopener noreferrer" class="btn btn--card">
+                <i class="fa-brands fa-google-play" aria-hidden="true"></i> Play Store
+              </a>
+            </div>
+          </article>
+
+          <!-- 11 -->
+          <article class="project-card reveal-up" data-category="racing" role="listitem">
+            <div class="project-card__image">
+              <img src="https://play-lh.googleusercontent.com/o4xJYxNznqjA34BMJtP1LWG8dfyZa_5DubRqDZrrNOUIRs9kVOGBzM72A-mEM361Qg=w480-h960-rw"
+                   alt="High Speed Real Racing — Google Play screenshot" loading="lazy" />
+            </div>
+            <div class="project-card__body">
+              <div class="project-card__tags">
+                <span class="tag">Unity</span><span class="tag">Android</span>
+                <span class="tag tag--genre">Racing</span>
+              </div>
+              <h3>High Speed Real Racing</h3>
+              <p>Fast-paced car racing game designed to push mobile graphic performance and speed thrills.</p>
+              <a href="https://play.google.com/store/apps/details?id=com.fungames.high.speed.real.car.racing"
+                 target="_blank" rel="noopener noreferrer" class="btn btn--card">
+                <i class="fa-brands fa-google-play" aria-hidden="true"></i> Play Store
+              </a>
+            </div>
+          </article>
+
+          <!-- 12 -->
+          <article class="project-card reveal-up" data-category="racing casual" role="listitem">
+            <div class="project-card__image">
+              <img src="https://play-lh.googleusercontent.com/lWHSVPsLSVLza4Jx8w9KBK7Jlzy3hrIEzfSP2GYvGyWG1MRiLNG6485aRVpAw_x1w17CcNFAzCHWEmwMGCO6nQ=w480-h960-rw"
+                   alt="Motobike Traffic Rider — Google Play screenshot" loading="lazy" />
+            </div>
+            <div class="project-card__body">
+              <div class="project-card__tags">
+                <span class="tag">Unity</span><span class="tag">Android</span>
+                <span class="tag tag--genre">Racing</span>
+              </div>
+              <h3>Motobike Traffic Rider</h3>
+              <p>Endless highway motorcycle game featuring heavy traffic dodging and high-score chasing.</p>
+              <a href="https://play.google.com/store/apps/details?id=com.and.endless.motobike.traffic.rider"
+                 target="_blank" rel="noopener noreferrer" class="btn btn--card">
+                <i class="fa-brands fa-google-play" aria-hidden="true"></i> Play Store
+              </a>
+            </div>
+          </article>
+
+          <!-- 13 -->
+          <article class="project-card reveal-up" data-category="racing" role="listitem">
+            <div class="project-card__image">
+              <img src="https://play-lh.googleusercontent.com/1AMFNtC-75EB5Aob-aFDfcISKp522cUJHE1PRymBdNt14Onph-j5sHHFB-Gzyp9xgg=w1052-h592-rw"
+                   alt="Car Stunt Master GT — Google Play screenshot" loading="lazy" />
+            </div>
+            <div class="project-card__body">
+              <div class="project-card__tags">
+                <span class="tag">Unity</span><span class="tag">Android</span>
+                <span class="tag tag--genre">Racing</span>
+              </div>
+              <h3>Car Stunt Master GT</h3>
+              <p>Extreme mobile stunt driving game allowing players to perform impossible GT car jumps.</p>
+              <a href="https://play.google.com/store/apps/details?id=com.kn.car.stunt.master.gtcar.games"
+                 target="_blank" rel="noopener noreferrer" class="btn btn--card">
+                <i class="fa-brands fa-google-play" aria-hidden="true"></i> Play Store
+              </a>
+            </div>
+          </article>
+
+          <!-- 14 -->
+          <article class="project-card reveal-up" data-category="puzzle casual" role="listitem">
+            <div class="project-card__image">
+              <img src="https://play-lh.googleusercontent.com/UuW8Oin4TS-ud6nMbwcUqTjxjSyAxYQpmpY1VxF74B84dOoh4ASC_NFkrNxQk1q07Kc=w480-h960-rw"
+                   alt="Thief Runner Escape — Google Play screenshot" loading="lazy" />
+            </div>
+            <div class="project-card__body">
+              <div class="project-card__tags">
+                <span class="tag">Unity</span><span class="tag">Android</span>
+                <span class="tag tag--genre">Puzzle</span>
+              </div>
+              <h3>Thief Runner Escape</h3>
+              <p>A hyper-casual puzzle escape game featuring stealth mechanics, running, and puzzle-solving.</p>
+              <a href="https://play.google.com/store/apps/details?id=com.funbashtechnologies.thief.runner.puzzle.escape.game"
+                 target="_blank" rel="noopener noreferrer" class="btn btn--card">
+                <i class="fa-brands fa-google-play" aria-hidden="true"></i> Play Store
+              </a>
+            </div>
+          </article>
+
+          <!-- 15 -->
+          <article class="project-card reveal-up" data-category="racing simulation" role="listitem">
+            <div class="project-card__image">
+              <img src="https://play-lh.googleusercontent.com/stGWZfHGXunef_IYjvxq9v_zmJycezUJEE3eCu46mkrjgGevGg6j2tMMjnAafaWo3fSrWmXaUevVY3eolQAUi2w=w480-h960-rw"
+                   alt="Highway Racing Sim — Google Play screenshot" loading="lazy" />
+            </div>
+            <div class="project-card__body">
+              <div class="project-card__tags">
+                <span class="tag">Unity</span><span class="tag">Android</span>
+                <span class="tag tag--genre">Racing</span>
+              </div>
+              <h3>Highway Racing Sim</h3>
+              <p>High-speed highway simulator blending fast driving with dynamic traffic and progression systems.</p>
+              <a href="https://play.google.com/store/apps/details?id=com.pw.highway.car.racing.simulator"
+                 target="_blank" rel="noopener noreferrer" class="btn btn--card">
+                <i class="fa-brands fa-google-play" aria-hidden="true"></i> Play Store
+              </a>
+            </div>
+          </article>
+
+        </div><!-- /project-grid -->
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+         SKILLS
+    ═══════════════════════════════════════ -->
+    <section id="skills" aria-labelledby="skills-heading">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <span class="section-eyebrow">What I Use</span>
+          <h2 id="skills-heading">Tech <span>Stack</span></h2>
+        </div>
+
+        <div class="skills-grid reveal-up">
+
+          <div class="skill-category">
+            <div class="skill-category__header">
+              <span class="skill-icon" aria-hidden="true"><i class="fa-solid fa-code"></i></span>
+              <h3>Programming</h3>
+            </div>
+            <ul role="list">
+              <li><i class="fa-solid fa-file-code" aria-hidden="true"></i> C++</li>
+              <li><i class="fa-solid fa-hashtag"   aria-hidden="true"></i> C#</li>
+              <li><i class="fa-solid fa-c"         aria-hidden="true"></i> C</li>
+              <li><i class="fa-brands fa-java"     aria-hidden="true"></i> Java</li>
+              <li><i class="fa-brands fa-python"   aria-hidden="true"></i> Python</li>
+            </ul>
+          </div>
+
+          <div class="skill-category">
+            <div class="skill-category__header">
+              <span class="skill-icon" aria-hidden="true"><i class="fa-solid fa-microchip"></i></span>
+              <h3>Game Engines</h3>
+            </div>
+            <ul role="list">
+              <li><i class="fa-brands fa-unity"              aria-hidden="true"></i> Unity 3D / 2D</li>
+              <li><i class="fa-solid fa-gamepad"             aria-hidden="true"></i> Unreal Engine</li>
+              <li><i class="fa-solid fa-gears"               aria-hidden="true"></i> Gameplay Mechanics</li>
+              <li><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i> Mobile Optimization</li>
+            </ul>
+          </div>
+
+          <div class="skill-category">
+            <div class="skill-category__header">
+              <span class="skill-icon" aria-hidden="true"><i class="fa-solid fa-toolbox"></i></span>
+              <h3>Core Skills</h3>
+            </div>
+            <ul role="list">
+              <li><i class="fa-solid fa-pen-ruler"   aria-hidden="true"></i> Game Design</li>
+              <li><i class="fa-solid fa-lightbulb"   aria-hidden="true"></i> Problem-Solving</li>
+              <li><i class="fa-brands fa-wordpress"  aria-hidden="true"></i> WordPress</li>
+              <li><i class="fa-solid fa-users"       aria-hidden="true"></i> Team Collaboration</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ═══════════════════════════════════════
+       FOOTER / CONTACT
+  ═══════════════════════════════════════ -->
+  <footer id="contact" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner reveal-up">
+
+        <div class="section-header">
+          <span class="section-eyebrow">Get In Touch</span>
+          <h2>Let's <span>Connect</span></h2>
+        </div>
+
+        <p class="footer__tagline">
+          Ready to build the next big hit? I'm eager to contribute my expertise
+          to the continued growth and success of future gaming projects.
+        </p>
+
+        <address class="contact-list" aria-label="Contact information">
+          <a href="mailto:syedmuhammadkashanali@gmail.com" class="contact-item">
+            <span class="contact-item__icon" aria-hidden="true"><i class="fa-solid fa-envelope"></i></span>
+            <span>syedmuhammadkashanali@gmail.com</span>
+          </a>
+          <a href="tel:+923040512820" class="contact-item">
+            <span class="contact-item__icon" aria-hidden="true"><i class="fa-solid fa-phone"></i></span>
+            <span>(+92) 304 0512820</span>
+          </a>
+          <div class="contact-item">
+            <span class="contact-item__icon" aria-hidden="true"><i class="fa-solid fa-location-dot"></i></span>
+            <span>Islamabad / Rawalpindi, Pakistan</span>
+          </div>
+        </address>
+
+        <div class="footer__actions">
+          <a href="mailto:syedmuhammadkashanali@gmail.com" class="btn btn--primary">
+            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Send an Email
+          </a>
+          <div class="social-links" aria-label="Social media">
+            <a href="https://www.linkedin.com/in/syed-muhammad-kashan-ali-7761b921a"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="LinkedIn profile" class="social-btn">
+              <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+            </a>
+            <a href="#" target="_blank" rel="noopener noreferrer"
+               aria-label="GitHub profile" class="social-btn">
+              <i class="fa-brands fa-github" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+
+        <p class="footer__copy">
+          &copy; 2026 Syed Muhammad Kashan Ali. All rights reserved.
+        </p>
+
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
