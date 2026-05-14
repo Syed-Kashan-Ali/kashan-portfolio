@@ -1,186 +1,84 @@
 /* ==========================================================================
-   script.js — KASHAN.ALI · GAME DEV PORTFOLIO
-   Warfare HUD Theme · Vanilla JS · Zero Dependencies
+   script.js — Kashan Ali · Aurora Noir Portfolio
+   Modules: Nav · Particles · Counters · Reveal · Filter · FAQ · Parallax
    ========================================================================== */
-
 'use strict';
 
-/* --------------------------------------------------------------------------
-   §1 · Utilities
-   -------------------------------------------------------------------------- */
-const $  = (sel, scope = document) => scope.querySelector(sel);
-const $$ = (sel, scope = document) => [...scope.querySelectorAll(sel)];
-const onReady = cb =>
-  document.readyState === 'loading'
-    ? document.addEventListener('DOMContentLoaded', cb)
-    : cb();
+const $  = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const onReady = cb => document.readyState==='loading'
+  ? document.addEventListener('DOMContentLoaded', cb) : cb();
 
-/* --------------------------------------------------------------------------
-   §2 · Boot Sequence — fake terminal loading screen
-   -------------------------------------------------------------------------- */
-function initBoot() {
-  const boot     = $('#boot');
-  const linesEl  = $('#bootLines');
-  const barEl    = $('#bootBar');
-  if (!boot) return;
-
-  const lines = [
-    'LOADING PORTFOLIO SYSTEM...',
-    'CHECKING UNITY SDK............OK',
-    'VERIFYING GAME ASSETS.........OK',
-    'MOUNTING ANDROID MODULES......OK',
-    'INITIALIZING HUD COMPONENTS...OK',
-    'ESTABLISHING CONNECTION........OK',
-    'DEPLOYING INTERFACE...........DONE',
-  ];
-
-  let lineIdx = 0;
-  let progress = 0;
-
-  /* Type each boot line one by one */
-  const typeLine = () => {
-    if (lineIdx >= lines.length) {
-      // All lines done — expand bar to 100% then dismiss
-      barEl.style.width = '100%';
-      setTimeout(() => boot.classList.add('done'), 700);
-      return;
-    }
-
-    const p   = document.createElement('p');
-    p.textContent = '> ';
-    linesEl.appendChild(p);
-
-    const text    = lines[lineIdx];
-    let   charIdx = 0;
-
-    const typeChar = () => {
-      if (charIdx < text.length) {
-        p.textContent = '> ' + text.slice(0, ++charIdx);
-        setTimeout(typeChar, 22);
-      } else {
-        // Colour the trailing status
-        if (text.includes('DONE')) p.style.color = '#a8ff00';
-        else if (text.includes('OK')) p.style.color = '#ff4800';
-
-        // Advance progress bar
-        progress = Math.min(100, progress + 100 / lines.length);
-        barEl.style.width = progress + '%';
-
-        lineIdx++;
-        setTimeout(typeLine, 80);
-      }
-    };
-
-    typeChar();
-  };
-
-  // Brief pause before starting
-  setTimeout(typeLine, 300);
+/* ── §1 Scroll Progress Bar ─────────────────────────────────────────────── */
+function initScrollProgress() {
+  const bar = $('#scrollProgress');
+  if (!bar) return;
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    bar.style.width = Math.min(pct, 100) + '%';
+  }, { passive: true });
 }
 
-/* --------------------------------------------------------------------------
-   §3 · Custom Cursor — tracks mouse, scales on hover
-   -------------------------------------------------------------------------- */
-function initCursor() {
-  const cursor = $('#cursor');
-  if (!cursor || window.matchMedia('(hover:none)').matches) {
-    if (cursor) cursor.style.display = 'none';
-    return;
-  }
-
-  let mx = 0, my = 0;   // Target position
-  let cx = 0, cy = 0;   // Current (lerped) position
-
-  /* Snap on mousemove, lerp in rAF */
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX;
-    my = e.clientY;
-  });
-
-  const lerp = (a, b, t) => a + (b - a) * t;
-
-  const loop = () => {
-    cx = lerp(cx, mx, 0.14);
-    cy = lerp(cy, my, 0.14);
-    cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
-    requestAnimationFrame(loop);
-  };
-  loop();
-
-  /* Grow ring on interactive elements */
-  const ring = $('.cursor__ring', cursor);
-  const dot  = $('.cursor__dot',  cursor);
-
-  $$('a, button, .fbtn, .badge, .gcard, .xp-card').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      ring.style.transform = 'translate(-50%,-50%) scale(1.8)';
-      ring.style.borderColor = '#a8ff00';
-      dot.style.background   = '#a8ff00';
-      dot.style.boxShadow    = '0 0 10px rgba(168,255,0,0.5)';
-    });
-    el.addEventListener('mouseleave', () => {
-      ring.style.transform = '';
-      ring.style.borderColor = '';
-      dot.style.background   = '';
-      dot.style.boxShadow    = '';
-    });
-  });
-}
-
-/* --------------------------------------------------------------------------
-   §4 · Navigation — scroll-compact + hamburger + active-link tracker
-   -------------------------------------------------------------------------- */
+/* ── §2 Navigation ──────────────────────────────────────────────────────── */
 function initNav() {
-  const nav       = $('#navbar');
-  const burger    = $('#hamburger');
-  const navLinks  = $('#navLinks');
-  const links     = $$('.nav__link');
+  const nav     = $('#navbar');
+  const burger  = $('#hamburger');
+  const links   = $('#navLinks');
+  const navLinks= $$('.nav__link');
 
-  /* Compact on scroll */
-  const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 60);
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  // Compact on scroll
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('is-scrolled', window.scrollY > 60);
+  }, { passive: true });
 
-  /* Hamburger open/close */
+  // Hamburger
   burger.addEventListener('click', () => {
     const open = burger.classList.toggle('is-open');
     burger.setAttribute('aria-expanded', String(open));
-    navLinks.classList.toggle('is-open', open);
+    links.classList.toggle('is-open', open);
     document.body.style.overflow = open ? 'hidden' : '';
   });
 
-  /* Close on link click (mobile) */
-  links.forEach(link => {
+  // Close on link click
+  navLinks.forEach(link => {
     link.addEventListener('click', () => {
       burger.classList.remove('is-open');
-      burger.setAttribute('aria-expanded', 'false');
-      navLinks.classList.remove('is-open');
+      burger.setAttribute('aria-expanded','false');
+      links.classList.remove('is-open');
       document.body.style.overflow = '';
     });
   });
 
-  /* Active link via IntersectionObserver */
+  // Active link via IntersectionObserver
   const sections = $$('section[id], footer[id]');
-  const sectionObs = new IntersectionObserver(entries => {
+  const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
-      const id   = e.target.id;
-      const hit  = links.find(l => l.getAttribute('href') === `#${id}`);
-      links.forEach(l => l.classList.remove('is-active'));
+      const hit = navLinks.find(l => l.getAttribute('href') === `#${e.target.id}`);
+      navLinks.forEach(l => l.classList.remove('is-active'));
       if (hit) hit.classList.add('is-active');
     });
   }, { rootMargin: '-40% 0px -55% 0px' });
-
-  sections.forEach(s => sectionObs.observe(s));
+  sections.forEach(s => obs.observe(s));
 }
 
-/* --------------------------------------------------------------------------
-   §5 · Scroll Reveal — IntersectionObserver, fires once per element
-   -------------------------------------------------------------------------- */
+/* ── §3 Smooth Scroll with nav offset ──────────────────────────────────── */
+function initSmoothScroll() {
+  $$('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if (!el) return;
+      e.preventDefault();
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+    });
+  });
+}
+
+/* ── §4 Scroll Reveal ───────────────────────────────────────────────────── */
 function initReveal() {
   const items = $$('.reveal-up');
   if (!items.length) return;
-
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -189,326 +87,181 @@ function initReveal() {
       }
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
   items.forEach(el => obs.observe(el));
 }
 
-/* --------------------------------------------------------------------------
-   §6 · Live Clock — shown in the hero HUD top-bar
-   -------------------------------------------------------------------------- */
-function initClock() {
-  const el = $('#liveClock');
-  if (!el) return;
+/* ── §5 Animated Counters ───────────────────────────────────────────────── */
+function initCounters() {
+  const els = $$('.counter');
+  if (!els.length) return;
 
-  const tick = () => {
-    const now = new Date();
-    const hh  = String(now.getHours()).padStart(2, '0');
-    const mm  = String(now.getMinutes()).padStart(2, '0');
-    const ss  = String(now.getSeconds()).padStart(2, '0');
-    el.textContent = `${hh}:${mm}:${ss}`;
-  };
+  const easeOut = p => 1 - Math.pow(2, -10 * p);
 
-  tick();
-  setInterval(tick, 1000);
-}
-
-/* --------------------------------------------------------------------------
-   §7 · Hex Grid Canvas — animated honeycomb background in hero
-   -------------------------------------------------------------------------- */
-function initHexCanvas() {
-  const canvas = $('#hexCanvas');
-  if (!canvas) return;
-
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    canvas.style.display = 'none';
-    return;
-  }
-
-  const ctx = canvas.getContext('2d');
-
-  /* Config */
-  const HEX_SIZE    = 28;     // Radius of each hexagon
-  const GAP         = 3;      // Gap between hexagons
-  const FIRE_CLR    = 'rgba(255,72,0,';
-  const LIME_CLR    = 'rgba(168,255,0,';
-  const PULSE_SPEED = 0.008;  // How fast hexes breathe
-
-  let cols, rows, hexes = [];
-  let raf;
-  let time = 0;
-
-  /* Flat-top hex geometry helper */
-  const hexPoints = (cx, cy, r) => {
-    const pts = [];
-    for (let i = 0; i < 6; i++) {
-      const angle = (Math.PI / 3) * i;        // 0°, 60°, 120° … flat-top
-      pts.push([cx + r * Math.cos(angle), cy + r * Math.sin(angle)]);
-    }
-    return pts;
-  };
-
-  const resize = () => {
-    canvas.width  = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-    buildGrid();
-  };
-
-  const buildGrid = () => {
-    hexes = [];
-    const effectiveR  = HEX_SIZE + GAP;
-    const hexW        = Math.sqrt(3) * effectiveR;
-    const hexH        = 2 * effectiveR;
-    cols = Math.ceil(canvas.width  / hexW) + 2;
-    rows = Math.ceil(canvas.height / (hexH * 0.75)) + 2;
-
-    for (let row = 0; row < rows; row++) {
-      for (let col = 0; col < cols; col++) {
-        const x = col * hexW + (row % 2) * (hexW / 2) - hexW;
-        const y = row * (hexH * 0.75) - hexH;
-
-        /* Random phase so each hex breathes at different timing */
-        hexes.push({
-          x, y,
-          phase:  Math.random() * Math.PI * 2,
-          speed:  0.3 + Math.random() * 0.7,
-          /* Occasional accent hexes that pulse lime */
-          accent: Math.random() < 0.04,
-        });
-      }
-    }
-  };
-
-  const drawHex = (pts, alpha, accent) => {
-    ctx.beginPath();
-    ctx.moveTo(pts[0][0], pts[0][1]);
-    for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
-    ctx.closePath();
-
-    const clr = accent ? LIME_CLR : FIRE_CLR;
-    ctx.strokeStyle = `${clr}${(alpha * 0.7).toFixed(3)})`;
-    ctx.lineWidth   = 0.8;
-    ctx.stroke();
-
-    if (alpha > 0.4) {
-      ctx.fillStyle = `${clr}${(alpha * 0.05).toFixed(3)})`;
-      ctx.fill();
-    }
-  };
-
-  const draw = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    time += PULSE_SPEED;
-
-    hexes.forEach(h => {
-      /* Sine wave pulse — each hex has a unique phase offset */
-      const pulse = (Math.sin(time * h.speed + h.phase) + 1) / 2; // 0 → 1
-      const alpha = 0.04 + pulse * 0.22;
-
-      const pts = hexPoints(h.x, h.y, HEX_SIZE);
-      drawHex(pts, alpha, h.accent);
-    });
-
-    raf = requestAnimationFrame(draw);
-  };
-
-  /* Pause when tab hidden */
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) cancelAnimationFrame(raf);
-    else draw();
-  });
-
-  /* Debounced resize */
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => { resize(); }, 200);
-  }, { passive: true });
-
-  resize();
-  draw();
-}
-
-/* --------------------------------------------------------------------------
-   §8 · Typewriter — cycles role strings with typing & deleting animation
-   -------------------------------------------------------------------------- */
-function initTypewriter() {
-  const el = $('#typewriter');
-  if (!el) return;
-
-  const roles = [
-    'GAMEPLAY PROGRAMMER',
-    'UNITY SPECIALIST',
-    'MOBILE OPTIMIZER',
-    'GAME SYSTEMS DESIGNER',
-    'ANDROID DEVELOPER',
-    'LEVEL ARCHITECT',
-  ];
-
-  let ri = 0, ci = 0, deleting = false;
-
-  const SPEED_TYPE   = 70;
-  const SPEED_DELETE = 38;
-  const PAUSE_FULL   = 2000;
-  const PAUSE_NEXT   = 350;
-
-  const tick = () => {
-    const cur = roles[ri];
-
-    if (!deleting) {
-      el.textContent = cur.slice(0, ++ci);
-      if (ci === cur.length) { deleting = true; return setTimeout(tick, PAUSE_FULL); }
-    } else {
-      el.textContent = cur.slice(0, --ci);
-      if (ci === 0) {
-        deleting = false;
-        ri = (ri + 1) % roles.length;
-        return setTimeout(tick, PAUSE_NEXT);
-      }
-    }
-
-    setTimeout(tick, deleting ? SPEED_DELETE : SPEED_TYPE);
-  };
-
-  setTimeout(tick, 1400);   // Start after boot sequence clears
-}
-
-/* --------------------------------------------------------------------------
-   §9 · Hero Stat Bar + Counter — animates width & counts up simultaneously
-   -------------------------------------------------------------------------- */
-function initHeroStats() {
-  const fills    = $$('.hstat__fill');
-  const counters = $$('.count');
-  if (!fills.length) return;
-
-  /* easeOutExpo — snappy acceleration then smooth deceleration */
-  const easeOutExpo = p => p === 1 ? 1 : 1 - Math.pow(2, -10 * p);
-
-  const animateCount = (el, target, duration = 1600) => {
+  const animate = (el, target, duration = 1800) => {
     const start = performance.now();
     const step  = now => {
-      const progress = Math.min((now - start) / duration, 1);
-      el.textContent = Math.floor(easeOutExpo(progress) * target);
-      if (progress < 1) requestAnimationFrame(step);
+      const p = Math.min((now - start) / duration, 1);
+      el.textContent = p >= 1 ? target : Math.floor(easeOut(p) * target);
+      if (p < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
   };
 
   let fired = false;
-
   const obs = new IntersectionObserver(entries => {
     if (fired || !entries.some(e => e.isIntersecting)) return;
     fired = true;
-
-    /* Animate bars */
-    fills.forEach(fill => {
-      const targetW = fill.dataset.w || '0';
-      requestAnimationFrame(() => { fill.style.width = targetW + '%'; });
+    els.forEach((el, i) => {
+      setTimeout(() => animate(el, parseInt(el.dataset.target, 10)), i * 120);
     });
-
-    /* Animate counters with slight stagger */
-    counters.forEach((el, i) => {
-      const target = parseInt(el.dataset.target, 10);
-      setTimeout(() => animateCount(el, target), i * 150);
-    });
-
     obs.disconnect();
   }, { threshold: 0.5 });
 
-  const statsEl = $('.hero__stats');
-  if (statsEl) obs.observe(statsEl);
-}
-
-/* --------------------------------------------------------------------------
-   §10 · XP Skill Bars — same mechanic, triggered on skills section entry
-   -------------------------------------------------------------------------- */
-function initXPBars() {
-  const fills = $$('.xpb-fill');
-  if (!fills.length) return;
-
-  let fired = false;
-
-  const obs = new IntersectionObserver(entries => {
-    if (fired || !entries.some(e => e.isIntersecting)) return;
-    fired = true;
-
-    fills.forEach((fill, i) => {
-      const xp = fill.dataset.xp || '0';
-      /* Stagger each bar by 80ms */
-      setTimeout(() => {
-        fill.style.width = xp + '%';
-      }, i * 80);
-    });
-
-    obs.disconnect();
-  }, { threshold: 0.3 });
-
-  const section = $('#skills');
+  const section = $('#stats');
   if (section) obs.observe(section);
 }
 
-/* --------------------------------------------------------------------------
-   §11 · Project Filter — instant show/hide with ARIA
-   -------------------------------------------------------------------------- */
+/* ── §6 Particle Canvas (hero background) ───────────────────────────────── */
+function initParticles() {
+  const canvas = $('#particleCanvas');
+  if (!canvas) return;
+  if (window.matchMedia('(prefers-reduced-motion:reduce)').matches) { canvas.style.display='none'; return; }
+
+  const ctx = canvas.getContext('2d');
+  const COLORS = ['rgba(139,92,246,', 'rgba(236,72,153,', 'rgba(6,182,212,'];
+  let W, H, particles=[], raf;
+
+  const resize = () => {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  };
+
+  const spawn = () => {
+    particles = Array.from({ length: 50 }, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 1.6 + 0.4,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+    }));
+  };
+
+  const draw = () => {
+    ctx.clearRect(0, 0, W, H);
+
+    // Draw connections
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const d  = Math.hypot(dx, dy);
+        if (d < 130) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(139,92,246,${(1 - d/130) * 0.15})`;
+          ctx.lineWidth   = 0.8;
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Draw particles
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color + '0.6)';
+      ctx.fill();
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+    });
+
+    raf = requestAnimationFrame(draw);
+  };
+
+  // Pause when hidden
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) cancelAnimationFrame(raf); else draw();
+  });
+
+  // Debounced resize
+  let rt;
+  window.addEventListener('resize', () => {
+    clearTimeout(rt);
+    rt = setTimeout(() => { resize(); spawn(); }, 200);
+  }, { passive: true });
+
+  resize(); spawn(); draw();
+}
+
+/* ── §7 Project Filter ──────────────────────────────────────────────────── */
 function initFilter() {
   const btns  = $$('.fbtn');
   const cards = $$('.gcard');
-  if (!btns.length || !cards.length) return;
+  if (!btns.length) return;
 
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
       btns.forEach(b => { b.classList.remove('is-active'); b.setAttribute('aria-selected','false'); });
       btn.classList.add('is-active');
-      btn.setAttribute('aria-selected', 'true');
-
+      btn.setAttribute('aria-selected','true');
       const filter = btn.dataset.filter;
-
       cards.forEach(card => {
         const cats = (card.dataset.category || '').split(' ');
-        const show = filter === 'all' || cats.includes(filter);
-        card.classList.toggle('is-hidden', !show);
+        card.classList.toggle('is-hidden', !(filter === 'all' || cats.includes(filter)));
       });
     });
   });
 }
 
-/* --------------------------------------------------------------------------
-   §12 · Smooth Scroll — offset for fixed nav height
-   -------------------------------------------------------------------------- */
-function initSmoothScroll() {
-  const NAV_H = 80;
-  $$('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const id     = a.getAttribute('href').slice(1);
-      const target = document.getElementById(id);
-      if (!target) return;
-      e.preventDefault();
-      window.scrollTo({
-        top: target.getBoundingClientRect().top + window.scrollY - NAV_H,
-        behavior: 'smooth',
+/* ── §8 FAQ Accordion ───────────────────────────────────────────────────── */
+function initFAQ() {
+  const items = $$('.faq-item');
+  if (!items.length) return;
+
+  items.forEach(item => {
+    const btn = $('.faq-q', item);
+    const ans = $('.faq-a', item);
+    if (!btn || !ans) return;
+
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('is-open');
+
+      // Close all
+      items.forEach(i => {
+        i.classList.remove('is-open');
+        const a = $('.faq-a', i);
+        const b = $('.faq-q', i);
+        if (a) a.classList.remove('is-open');
+        if (b) b.setAttribute('aria-expanded', 'false');
       });
+
+      // Open clicked (if it was closed)
+      if (!isOpen) {
+        item.classList.add('is-open');
+        ans.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
     });
   });
 }
 
-/* --------------------------------------------------------------------------
-   §13 · Card Hover Tilt — subtle 3-D perspective on game cards
-   -------------------------------------------------------------------------- */
+/* ── §9 Hero Card Tilt ──────────────────────────────────────────────────── */
 function initCardTilt() {
   if (window.matchMedia('(hover:none)').matches) return;
   if (window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
 
-  const MAX = 6; // Max tilt degrees
-
-  $$('.gcard').forEach(card => {
+  $$('.hcard, .gcard, .acard, .stat-card, .proc-card').forEach(card => {
     card.addEventListener('mousemove', e => {
       const r  = card.getBoundingClientRect();
-      const dx = (e.clientX - r.left - r.width  / 2) / (r.width  / 2);
-      const dy = (e.clientY - r.top  - r.height / 2) / (r.height / 2);
-
-      card.style.transform  = `perspective(800px) rotateX(${-dy*MAX}deg) rotateY(${dx*MAX}deg) translateY(-8px)`;
+      const dx = (e.clientX - r.left - r.width/2)  / (r.width/2);
+      const dy = (e.clientY - r.top  - r.height/2) / (r.height/2);
+      const MAX = card.classList.contains('hcard') ? 8 : 5;
+      card.style.transform  = `perspective(900px) rotateX(${-dy*MAX}deg) rotateY(${dx*MAX}deg) translateY(-8px)`;
       card.style.transition = 'transform 0.08s linear';
     });
-
     card.addEventListener('mouseleave', () => {
       card.style.transition = 'transform 0.55s cubic-bezier(0.16,1,0.3,1)';
       card.style.transform  = '';
@@ -516,152 +269,91 @@ function initCardTilt() {
   });
 }
 
-/* --------------------------------------------------------------------------
-   §14 · Badge Stagger — skill badges pop in one by one on section entry
-   -------------------------------------------------------------------------- */
-function initBadgeStagger() {
-  const badges = $$('.badge');
-  if (!badges.length) return;
+/* ── §10 Stagger Animations ─────────────────────────────────────────────── */
+function initStagger() {
+  // Timeline items
+  $$('.tl-item').forEach((el, i) => { el.style.transitionDelay = `${i * 80}ms`; });
 
-  /* Start invisible */
-  badges.forEach(b => {
-    b.style.opacity   = '0';
-    b.style.transform = 'translateY(16px) scale(0.9)';
-  });
+  // Stat cards
+  $$('.stat-card').forEach((el, i) => { el.style.transitionDelay = `${i * 80}ms`; });
 
-  let fired = false;
-  const obs = new IntersectionObserver(entries => {
-    if (fired || !entries.some(e => e.isIntersecting)) return;
-    fired = true;
+  // Process cards
+  $$('.proc-card').forEach((el, i) => { el.style.transitionDelay = `${i * 90}ms`; });
 
-    badges.forEach((b, i) => {
-      setTimeout(() => {
-        b.style.transition = 'opacity 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1)';
-        b.style.opacity    = '1';
-        b.style.transform  = 'none';
-      }, i * 55);
-    });
+  // About cards
+  $$('.acard').forEach((el, i) => { el.style.transitionDelay = `${i * 70}ms`; });
 
-    obs.disconnect();
-  }, { threshold: 0.2 });
+  // Skill groups
+  $$('.skill-group').forEach((el, i) => { el.style.transitionDelay = `${i * 100}ms`; });
 
-  const grid = $('.badges-grid');
-  if (grid) obs.observe(grid);
+  // FAQ items
+  $$('.faq-item').forEach((el, i) => { el.style.transitionDelay = `${i * 60}ms`; });
 }
 
-/* --------------------------------------------------------------------------
-   §15 · Timeline Stagger — XP items slide in with cascade delay
-   -------------------------------------------------------------------------- */
-function initTimelineStagger() {
-  $$('.xp-item').forEach((el, i) => {
-    el.style.transitionDelay = `${i * 90}ms`;
-  });
-}
-
-/* --------------------------------------------------------------------------
-   §16 · Achievement Stagger — about section cards slide in
-   -------------------------------------------------------------------------- */
-function initAchievementStagger() {
-  const items = $$('.ach-item');
-  if (!items.length) return;
-
-  items.forEach(el => {
-    el.style.opacity   = '0';
-    el.style.transform = 'translateX(-20px)';
-  });
-
-  let fired = false;
-  const obs = new IntersectionObserver(entries => {
-    if (fired || !entries.some(e => e.isIntersecting)) return;
-    fired = true;
-
-    items.forEach((el, i) => {
-      setTimeout(() => {
-        el.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1)';
-        el.style.opacity    = '1';
-        el.style.transform  = 'none';
-      }, i * 100);
-    });
-
-    obs.disconnect();
-  }, { threshold: 0.2 });
-
-  const wrap = $('.achievements');
-  if (wrap) obs.observe(wrap);
-}
-
-/* --------------------------------------------------------------------------
-   §17 · Glitch on demand — fires on logo hover
-   -------------------------------------------------------------------------- */
-function initLogoGlitch() {
-  const logo = $('.nav__logo');
-  if (!logo) return;
-
-  logo.addEventListener('mouseenter', () => {
-    logo.style.animation = 'none';
-    logo.offsetHeight; // force reflow
-    logo.style.color = '#a8ff00';
-    setTimeout(() => { logo.style.color = ''; }, 200);
-  });
-}
-
-/* --------------------------------------------------------------------------
-   §18 · Parallax — hero name shifts slightly on scroll (subtle depth)
-   -------------------------------------------------------------------------- */
-function initParallax() {
+/* ── §11 Aurora Orbs Mouse Parallax ────────────────────────────────────── */
+function initAuroraParallax() {
   if (window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
 
-  const name    = $('.hero__name');
-  const content = $('.hero__content');
+  const orbs = $$('.aurora__orb');
+  let mx = 0, my = 0, cx = 0, cy = 0;
 
-  const onScroll = () => {
-    const scrollY = window.scrollY;
-    if (name)    name.style.transform    = `translateY(${scrollY * 0.12}px)`;
-    if (content) content.style.transform = `translateY(${scrollY * 0.06}px)`;
+  document.addEventListener('mousemove', e => {
+    mx = (e.clientX / window.innerWidth  - 0.5) * 30;
+    my = (e.clientY / window.innerHeight - 0.5) * 30;
+  });
+
+  const lerp = (a, b, t) => a + (b - a) * t;
+
+  const tick = () => {
+    cx = lerp(cx, mx, 0.04);
+    cy = lerp(cy, my, 0.04);
+    orbs.forEach((orb, i) => {
+      const factor = (i + 1) * 0.4;
+      orb.style.transform = `translate(${cx * factor}px, ${cy * factor}px)`;
+    });
+    requestAnimationFrame(tick);
   };
-
-  window.addEventListener('scroll', onScroll, { passive: true });
+  tick();
 }
 
-/* --------------------------------------------------------------------------
-   §19 · Contact Box hover glow — fires border glow on cbox hover
-   -------------------------------------------------------------------------- */
-function initContactGlow() {
-  $$('.cbox').forEach(box => {
-    box.addEventListener('mouseenter', () => {
-      const icon = box.querySelector('.cbox__icon');
-      if (icon) icon.style.boxShadow = '0 0 18px rgba(255,72,0,0.5)';
-    });
-    box.addEventListener('mouseleave', () => {
-      const icon = box.querySelector('.cbox__icon');
-      if (icon) icon.style.boxShadow = '';
-    });
+/* ── §12 Hero badge typewriter ─────────────────────────────────────────── */
+function initTypewriter() {
+  // The hero title "Building Games Players Love" stays static
+  // The hero sub already has full text
+  // Add a subtle shimmer on the grad-text words
+  const gradTexts = $$('.grad-text');
+  gradTexts.forEach(el => {
+    el.style.backgroundSize = '200%';
+    el.style.backgroundPosition = '0%';
+    let pos = 0;
+    setInterval(() => {
+      pos = (pos + 0.5) % 200;
+      el.style.backgroundPosition = pos + '%';
+    }, 30);
   });
 }
 
-/* --------------------------------------------------------------------------
-   §20 · Boot → then unlock page; Wire everything on DOMContentLoaded
-   -------------------------------------------------------------------------- */
-onReady(() => {
-  /* Boot sequence plays first — rest of init happens immediately in parallel
-     because the boot overlay sits on top and covers everything anyway.       */
-  initBoot();
+/* ── §13 Currently section live indicator ──────────────────────────────── */
+function initCurrently() {
+  // Pulse dot already animates via CSS
+  // Add subtle text shimmer to the "currently" label
+  const label = $('.curr-label');
+  if (!label) return;
+}
 
-  initCursor();          // §3  — Custom crosshair cursor
-  initNav();             // §4  — Navbar behaviour
-  initReveal();          // §5  — Scroll-reveal
-  initClock();           // §6  — Live clock in HUD bar
-  initHexCanvas();       // §7  — Animated hex grid background
-  initTypewriter();      // §8  — Typewriter role cycler
-  initHeroStats();       // §9  — Hero HUD bars + counters
-  initXPBars();          // §10 — Skill XP bar animation
-  initFilter();          // §11 — Genre filter tabs
-  initSmoothScroll();    // §12 — Smooth anchor scroll with nav offset
-  initCardTilt();        // §13 — 3-D tilt on game cards
-  initBadgeStagger();    // §14 — Badge pop-in stagger
-  initTimelineStagger(); // §15 — Timeline cascade delay
-  initAchievementStagger(); // §16 — Achievement slide-in
-  initLogoGlitch();      // §17 — Logo glitch on hover
-  initParallax();        // §18 — Hero parallax depth
-  initContactGlow();     // §19 — Contact box icon glow
+/* ── §14 Boot — wire everything ─────────────────────────────────────────── */
+onReady(() => {
+  initScrollProgress();  // §1
+  initNav();             // §2
+  initSmoothScroll();    // §3
+  initReveal();          // §4
+  initCounters();        // §5
+  initParticles();       // §6
+  initFilter();          // §7
+  initFAQ();             // §8
+  initCardTilt();        // §9
+  initStagger();         // §10
+  initAuroraParallax();  // §11
+  initTypewriter();      // §12
+  initCurrently();       // §13
 });
